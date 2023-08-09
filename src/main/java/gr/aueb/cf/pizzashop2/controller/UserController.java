@@ -1,8 +1,6 @@
 package gr.aueb.cf.pizzashop2.controller;
 
 import gr.aueb.cf.pizzashop2.model.User;
-import gr.aueb.cf.pizzashop2.repository.UserRepository;
-import gr.aueb.cf.pizzashop2.dto.UserDTO;
 import gr.aueb.cf.pizzashop2.service.IUserService;
 import gr.aueb.cf.pizzashop2.service.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,7 @@ public class UserController {
         Iterable<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "users";
+
     }
 
 }

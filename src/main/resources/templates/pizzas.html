@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Shop - Pizzas</title>
+</head>
+<body>
+<h1>Pizza Shop - Pizzas</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterating over the list of pizzas -->
+    <tr th:each="pizza : ${pizzas}">
+        <td th:text="${pizza.id}"></td>
+        <td th:text="${pizza.name}"></td>
+        <td th:text="${pizza.description}"></td>
+        <td th:text="${pizza.price}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

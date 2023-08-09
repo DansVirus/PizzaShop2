@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface PizzaRepository extends JpaRepository<Pizza, Long> {
 
+    Pizza findPizzaById(Long id);
+    Pizza findPizzaByName(String name);
+
     List<Pizza> findByNameContainingIgnoreCase(String keyword);
 
     List<Pizza> findByPriceLessThan(double price);

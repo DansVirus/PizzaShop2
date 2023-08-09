@@ -146,12 +146,12 @@ public class UserRestController {
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content)})
     @RequestMapping(value = "/users/{userId}", method = RequestMethod.DELETE)
-    public ResponseEntity<UserDTO> deleteUser(@PathVariable("userId") Long userId) {
+    public ResponseEntity<User> deleteUser(@PathVariable("userId") Long userId) {
         try {
             User user = userService.getUserById(userId);
             userService.deleteUser(userId);
-            UserDTO userDTO = map(user);
-            return new ResponseEntity<>(userDTO, HttpStatus.OK);
+//            UserDTO userDTO = map(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             LoggerUtil.getCurrentLogger().warning(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

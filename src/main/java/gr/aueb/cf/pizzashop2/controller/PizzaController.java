@@ -1,6 +1,7 @@
 package gr.aueb.cf.pizzashop2.controller;
 
 import gr.aueb.cf.pizzashop2.repository.PizzaRepository;
+import gr.aueb.cf.pizzashop2.service.IPizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/pizzas")
 public class PizzaController {
 
-    private final PizzaRepository pizzaRepository;
+    private final IPizzaService pizzaService;
 
     @Autowired
-    public PizzaController(PizzaRepository pizzaRepository) {
-        this.pizzaRepository = pizzaRepository;
+    public PizzaController(IPizzaService pizzaService) {
+        this.pizzaService = pizzaService;
+
     }
 
-    @GetMapping
+    @GetMapping("/api/pizzas")
     public String getAllPizzas(Model model) {
-        model.addAttribute("pizzas", pizzaRepository.findAll());
+        model.addAttribute("pizzas", pizzaService.getAllPizzas());
         return "pizzas";
     }
 }

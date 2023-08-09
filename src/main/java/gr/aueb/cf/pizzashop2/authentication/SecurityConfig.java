@@ -32,11 +32,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/login").permitAll()
+        http
+                .cors().and().csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/login", "/register").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/api/users/**").permitAll()
-                .anyRequest().authenticated().and().formLogin()
-                .loginPage("/login").defaultSuccessUrl("/users").permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/login").defaultSuccessUrl("/user_admin/api/users").permitAll()       //"/users/api/users"
                 .and().httpBasic()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");

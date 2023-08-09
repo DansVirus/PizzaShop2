@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "PIZZAS")
-public class Pizza {
+@Table(name = "DRINKS")
+public class Drink {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class Pizza {
 
 
 
-    public Pizza(Long id, String name, String description, double price) {
+    public Drink(Long id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;

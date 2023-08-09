@@ -26,16 +26,22 @@ public class LoginController {
         String referer = request.getHeader("Referer");
         request.getSession().setAttribute(CustomAuthenticationSuccessHandler.REDIRECT_URL_SESSION_ATTRIBUTE_NAME, referer);
 
-        return principal == null ? "login" : "redirect:/api/users";
+//        return principal == null ? "login" : "redirect:/users/api/users";
+        return principal == null ? "login" : "redirect:/user_admin/api/users";
 
     }
 
     @GetMapping(path = "/")
     String root(Model model, Principal principal, HttpServletRequest request) throws Exception  {
-        return principal == null ? "login" : "/users";
+//        return principal == null ? "login" : "redirect:/users/api/users";
+        return principal == null ? "login" : "redirect:/user_admin/api/users";
     }
 
 
-
+    @GetMapping(path = "/register")
+    String register(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
+    }
 
 }

@@ -19,6 +19,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+        System.out.println("userRepository: " + userRepository);
     }
 
     @Transactional
@@ -36,11 +37,20 @@ public class UserServiceImpl implements IUserService {
     }
 
 
+//    @Transactional
+//    @Override
+//    public void deleteUser(Long id)  {
+//        userRepository.deleteById(id);
+//    }
+
+
     @Transactional
     @Override
-    public void deleteUser(Long id)  {
-        userRepository.deleteById(id);
+    public void deleteUser(Long id) throws EntityNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(User.class, id));
+        userRepository.delete(user);
     }
+
 
 
     @Transactional
@@ -53,6 +63,7 @@ public class UserServiceImpl implements IUserService {
         return users;
     }
 
+    @Transactional
     @Override
     public User getUserById(Long id) throws EntityNotFoundException {
         Optional<User> user;

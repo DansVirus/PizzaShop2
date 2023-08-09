@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include Bootstrap JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Admin Page</h1>
+  <hr>
+  <h2>User List</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the user list -->
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.password}"></td>
+      <td>
+        <a th:href="@{/user_admin/api/users/{userId}(userId=${user.id})}" class="btn btn-primary btn-sm">Update</a>
+
+        <form th:action="@{/user_admin/api/users/{userId}(userId=${user.id})}" method="post" style="display: inline;"
+              th:id="'deleteForm-' + ${user.id}" onsubmit="deleteUser(event, ${user.id})">
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/user_admin/admin/add}" class="btn btn-success">Add User</a>
+  <a th:href="@{/}" class="btn btn-secondary">Back</a>
+</div>
+
+<script>
+  function deleteUser(event, userId) {
+    event.preventDefault(); // Prevent form submission
+
+    var confirmation = confirm('Are you sure you want to delete this user?');
+    if (confirmation) {
+      var formId = 'deleteForm-' + userId;
+      var form = document.getElementById(formId);
+
+      fetch(form.action, {
+        method: 'DELETE',
+      })
+              .then(function(response) {
+                if (response.ok) {
+                  console.log('User deleted successfully');
+                  // Refresh the page or update the user list
+                  location.reload();
+                } else {
+                  console.error('Failed to delete user');
+                }
+              })
+              .catch(function(error) {
+                console.error(error);
+              });
+    }
+  }
+</script>
+
+</body>
+</html>

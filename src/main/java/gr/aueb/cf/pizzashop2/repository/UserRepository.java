@@ -9,6 +9,7 @@ import java.util.List;
 
 
 // This interface is used to define the database operations for the User model.
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsernameEquals(String username);
 

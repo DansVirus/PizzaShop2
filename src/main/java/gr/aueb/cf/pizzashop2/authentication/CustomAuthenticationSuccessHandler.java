@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         if (redirectURLObject != null) {
             setDefaultTargetUrl(redirectURLObject.toString());
         } else {
-            setDefaultTargetUrl("/users");
+            setDefaultTargetUrl("/user_admin");
         }
 
         request.getSession().removeAttribute(REDIRECT_URL_SESSION_ATTRIBUTE_NAME);

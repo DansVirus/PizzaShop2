@@ -11,10 +11,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -48,6 +51,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         }
             return new UsernamePasswordAuthenticationToken(username, password, Collections.<GrantedAuthority>emptyList());
+
+
+//            List<GrantedAuthority> authorities = new ArrayList<>();
+//            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+//            return new UsernamePasswordAuthenticationToken(username, password, authorities);
         }
 
 
